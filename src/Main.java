@@ -4,6 +4,7 @@ public class Main {
     public static void main(String[] args) {
 
         //Completar Codigo
+        Balsa Acasta = new Balsa(1,0.5);
 
     }
 }
