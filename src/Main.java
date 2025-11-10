@@ -31,8 +31,10 @@ public class Main {
             Pasajero p = new Pasajero (id,prioridad);
             pasajerosBarco.add(p);
             id++;
-            System.out.println(p);
         }
+
+        //creo el Barco con los pasajeros
+        Barco laAlianza = new Barco(pasajerosBarco);
 
 
     }
