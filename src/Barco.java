@@ -13,4 +13,21 @@ public class Barco {
         return !pasajeros.isEmpty();
     }
 
+    public Pasajero pasajeroPrioritario(){
+        //queremos obtener el pasajero con mayor prioridad
+        if (pasajeros.isEmpty()) { //comprobamos si hay pasajeros en el barco
+            return null; // si no hay, devolvemos nulo
+        }
+
+        Pasajero prioritario = pasajeros.get(0); //nos guardamos el primer pasajero del Array
+
+        for (Pasajero p : pasajeros) { // recorremos los pasajeros
+            if (p.getPrioridad() < prioritario.getPrioridad()) { //si la prioridad del siguiente es menor...
+                prioritario = p; // nuestro pasajero prioritario pasa a ser ese
+            }
+        }
+
+        return prioritario; // devolvemos el pasajero más prioritario y con menor id
+    }
+
 }
