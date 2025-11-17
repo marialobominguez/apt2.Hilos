@@ -3,10 +3,15 @@ import java.util.ArrayList;
 public class Rescate implements Runnable{
     private boolean quedanPasajeros;
 
-    public Rescate(ArrayList<Pasajero> pasajeros){
-        Barco barco = new Barco(pasajeros);
-        quedanPasajeros = barco.hayPasajeros();
+    private Barco barco;
+    private Balsa balsa;
+
+    // le paso el barco y la balsa para poder hacer cosas con ambos
+    public Rescate(Barco barco, Balsa balsa) {
+        this.barco = barco;
+        this.balsa = balsa;
     }
+
     @Override
     public void run() {
         while(quedanPasajeros){
