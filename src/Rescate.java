@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 public class Rescate implements Runnable{
-    private boolean quedanPasajeros;
 
     private Barco barco;
     private Balsa balsa;
@@ -14,8 +13,7 @@ public class Rescate implements Runnable{
 
     @Override
     public void run() {
-        while(quedanPasajeros){
-            // mientras haya pasajeros vamos a
+        while (barco.hayPasajeros()){// mientras haya pasajeros vamos a
             // embarcar
             //ir a tierra (sleep)
             //desembarcar y mostrar los pasajeros rescatados (toString)
