@@ -16,4 +16,12 @@ public class Balsa {
         return capacidad;
     }
 
+    public void subirPasajeroBalsa(Pasajero pas){
+        pasajeros.add(pas);
+    }
+
+    public void bajarPasajeroBalsa(Pasajero pas){
+        pasajeros.remove(pas);
+    }
+
 }
