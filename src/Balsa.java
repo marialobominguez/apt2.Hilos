@@ -25,7 +25,7 @@ public class Balsa {
     }
 
     public void bajarPasajeroBalsa(Pasajero pas){
-        System.out.println("Pasajero salvado: "+pas.toString());
+        //System.out.println("Pasajero salvado: "+pas.toString()); (lo comento porque ya está en el desembarcar() de Rescate)
         pasajeros.remove(pas);
     }
 

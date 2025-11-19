@@ -25,6 +25,7 @@ public class Rescate extends Thread{
 
             // 4_ volvemos al barco (sleep)
             volviendoABarco();
+            System.out.println("Quedan ");
 
         } //fin while (no quedan pasajeros)
     } // fin run
@@ -55,7 +56,7 @@ public class Rescate extends Thread{
         System.out.println("Desembarcando pasajeros...");
         System.out.println("Pasajeros salvados: ");
         for (int i = 0; i < balsa.getCapacidad(); i++) {
-            System.out.println("/t"+balsa.getPasajeros().get(i)+" baja de la balsa "+balsa); //no tengo muy claro de que esto esté bien
+            System.out.println("/t"+balsa.getPasajeros().get(i).toString()+" baja de la balsa "+balsa); //no tengo muy claro de que esto esté bien
             balsa.bajarPasajeroBalsa(balsa.getPasajeros().get(i)); //tampoco lo tengo claro
         }
         System.out.println("------------------------------------");
