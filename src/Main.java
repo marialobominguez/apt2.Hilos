@@ -57,5 +57,8 @@ public class Main {
         rescateDeimos.join();
         rescateExpedicion.join();
 
+        //indico que ha finalizado el salvamento
+        System.out.println("SALVAMENTO FINALIZADO :D");
+
     }
 }
