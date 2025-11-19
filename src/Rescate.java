@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Rescate implements Runnable{
+public class Rescate extends Thread{
 
     private Barco barco;
     private Balsa balsa;
