@@ -16,7 +16,9 @@ public class Balsa {
         return capacidad;
     }
 
-    public double getTiempo(){return tiempo;}
+    public double getTiempo(){
+        return tiempo*1000; //lo multiplico por 1000 para que pase a segundos en el Thread.sleep
+    }
 
     public void subirPasajeroBalsa(Pasajero pas){
         pasajeros.add(pas);
