@@ -45,7 +45,12 @@ public class Rescate implements Runnable{
 
 
             // volvemos al barco (sleep)
-
+            System.out.println("La balsa "+balsa+" vuelve al barco a comprobar si quedan pasajeros.");
+            try {
+                Thread.sleep((int)(balsa.getTiempo()));
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
 
         }
     }
