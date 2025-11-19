@@ -34,7 +34,7 @@ public class Rescate extends Thread{
 
     public synchronized void embarcar(){
         System.out.println("Embarcando pasajero(s) en la balsa "+balsa.getNombre()+"...");
-        for (int i = 0; i < balsa.getPasajeros().size(); i++) { //vamos a meter tantos pasajeros como permita la balsa
+        for (int i = 0; i < balsa.getCapacidad(); i++) { //vamos a meter tantos pasajeros como permita la balsa
             Pasajero p = barco.pasajeroPrioritario();
             System.out.println("\t"+p.toString()+" sube a la balsa "+balsa.getNombre());
             balsa.subirPasajeroBalsa(p); //sube pasajero a la balsa y por lo tanto...
