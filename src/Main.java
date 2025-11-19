@@ -6,11 +6,11 @@ public class Main {
     public static void main(String[] args) throws InterruptedException, RuntimeException{
 
         //Creo las balsas:
-        Balsa Acasta = new Balsa(1,0.5);
-        Balsa Banff = new Balsa(2,1);
-        Balsa Cadiz = new Balsa(3,2);
-        Balsa Deimos = new Balsa(4,4);
-        Balsa Expedicion = new Balsa(5,8);
+        Balsa Acasta = new Balsa("Acasta",1,0.5);
+        Balsa Banff = new Balsa("Banff",2,1);
+        Balsa Cadiz = new Balsa("Cadiz",3,2);
+        Balsa Deimos = new Balsa("Deimos",4,4);
+        Balsa Expedicion = new Balsa("Expedicion",5,8);
 
         //Creo la lista en la que voy a añadir a los pasajeros
         ArrayList<Pasajero> pasajerosBarco = new ArrayList<>();

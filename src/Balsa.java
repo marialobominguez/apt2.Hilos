@@ -1,15 +1,20 @@
 import java.util.ArrayList;
 
 public class Balsa {
-
+    private String nombre;
     private int capacidad;
     private double tiempo;
     private ArrayList<Pasajero> pasajeros;
 
-    public Balsa(int capacidad, double tiempo) {
+    public Balsa(String nombre, int capacidad, double tiempo) {
+        this.nombre=nombre;
         this.capacidad = capacidad;
         this.tiempo = tiempo;
         this.pasajeros = new ArrayList<Pasajero>();
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     public int getCapacidad() {

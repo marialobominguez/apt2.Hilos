@@ -33,10 +33,10 @@ public class Rescate extends Thread{
     } // fin run
 
     public synchronized void embarcar(){
-        System.out.println("Embarcando pasajero(s) en la balsa "+balsa+"...");
+        System.out.println("Embarcando pasajero(s) en la balsa "+balsa.getNombre()+"...");
         for (int i = 0; i < balsa.getCapacidad(); i++) { //vamos a meter tantos pasajeros como permita la balsa
             Pasajero p = barco.pasajeroPrioritario();
-            System.out.println("/t"+p.toString()+" sube a la balsa "+balsa);
+            System.out.println("/t"+p.toString()+" sube a la balsa "+balsa.getNombre());
             balsa.subirPasajeroBalsa(p); //sube pasajero a la balsa y por lo tanto...
             barco.bajarPasajerosBarco(p);//... baja del barco
             System.out.println("------------------------------------");
@@ -44,7 +44,7 @@ public class Rescate extends Thread{
     }
 
     public synchronized void navegandoATierra(){
-        System.out.println(balsa+" está navegando a tierra firme...");
+        System.out.println(balsa.getNombre()+" está navegando a tierra firme...");
         try {
             Thread.sleep((int)(balsa.getTiempo()));
         } catch (InterruptedException e) {
@@ -54,18 +54,18 @@ public class Rescate extends Thread{
     }
 
     public synchronized void desembarcar(){
-        System.out.println(balsa+" ESTÁ EN TIERRA FIRME");
+        System.out.println(balsa.getNombre()+" ESTÁ EN TIERRA FIRME");
         System.out.println("Desembarcando pasajeros...");
         System.out.println("Pasajeros salvados: ");
         for (int i = 0; i < balsa.getCapacidad(); i++) {
-            System.out.println("/t"+balsa.getPasajeros().get(i).toString()+" baja de la balsa "+balsa); //no tengo muy claro de que esto esté bien
+            System.out.println("/t"+balsa.getPasajeros().get(i).toString()+" baja de la balsa "+balsa.getNombre()); //no tengo muy claro de que esto esté bien
             balsa.bajarPasajeroBalsa(balsa.getPasajeros().get(i)); //tampoco lo tengo claro
         }
         System.out.println("------------------------------------");
     }
 
     public synchronized void volviendoABarco(){
-        System.out.println("La balsa "+balsa+" vuelve al barco a comprobar si quedan pasajeros.");
+        System.out.println("La balsa "+balsa.getNombre()+" vuelve al barco a comprobar si quedan pasajeros.");
         try {
             Thread.sleep((int)(balsa.getTiempo()));
         } catch (InterruptedException e) {
