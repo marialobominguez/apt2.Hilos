@@ -16,6 +16,8 @@ public class Balsa {
         return capacidad;
     }
 
+    public double getTiempo(){return tiempo;}
+
     public void subirPasajeroBalsa(Pasajero pas){
         pasajeros.add(pas);
     }
