@@ -15,10 +15,10 @@ public class Rescate implements Runnable{
     public void run() {
         while (barco.hayPasajeros()){// mientras haya pasajeros vamos a
             // embarcar = baja pasajero del barco y sube a la balsa
-            System.out.println("Embarcando pasajero(s)...");
+            System.out.println("Embarcando pasajero(s) en la balsa "+balsa+"...");
             for (int i = 0; i < balsa.getCapacidad(); i++) { //vamos a meter tantos pasajeros como permita la balsa
                 Pasajero p = barco.pasajeroPrioritario();
-                System.out.println("/t"+p.toString());
+                System.out.println("/t"+p.toString()+" sube a la balsa "+balsa);
                 balsa.subirPasajeroBalsa(p); //sube pasajero a la balsa y por lo tanto...
                 barco.bajarPasajerosBarco(p);//... baja del barco
                 System.out.println("------------------------------------");
