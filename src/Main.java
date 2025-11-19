@@ -50,5 +50,12 @@ public class Main {
         rescateDeimos.start();
         rescateExpedicion.start();
 
+        //espero a que terminen los rescates
+        rescateAcasta.join();
+        rescateBanff.join();
+        rescateCadiz.join();
+        rescateDeimos.join();
+        rescateExpedicion.join();
+
     }
 }
