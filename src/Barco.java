@@ -37,4 +37,8 @@ public class Barco {
         pasajeros.remove(pas);
     }
 
+    public ArrayList<Pasajero> getPasajeros() {
+        return (ArrayList<Pasajero>) pasajeros; //paso la lista a tipo ArrayList
+    }
+
 }

@@ -25,7 +25,9 @@ public class Rescate extends Thread{
 
             // 4_ volvemos al barco (sleep)
             volviendoABarco();
-            System.out.println("Quedan ");
+
+            //muestro los pasajeros restantes
+            System.out.println("Quedan "+barco.getPasajeros().size());
 
         } //fin while (no quedan pasajeros)
     } // fin run
