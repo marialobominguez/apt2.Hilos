@@ -70,7 +70,7 @@ public class Rescate extends Thread{
             throw new RuntimeException(e);
         }
         //muestro los pasajeros restantes
-        System.out.println("Quedan "+barco.getPasajeros().size());
+        System.out.println(balsa.getNombre()+" ve que quedan "+barco.getPasajeros().size());
         System.out.println("------------------------------------");
     }
 
