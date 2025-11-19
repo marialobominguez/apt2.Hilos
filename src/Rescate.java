@@ -43,7 +43,7 @@ public class Rescate extends Thread{
         }
     }
 
-    public void navegandoATierra(){
+    public synchronized void navegandoATierra(){
         System.out.println(balsa.getNombre()+" está navegando a tierra firme...");
         try {
             Thread.sleep((int)(balsa.getTiempo()));
@@ -53,7 +53,7 @@ public class Rescate extends Thread{
         System.out.println("------------------------------------");
     }
 
-    public void desembarcar(){
+    public synchronized void desembarcar(){
         System.out.println(balsa.getNombre()+" ESTÁ EN TIERRA FIRME");
         System.out.println("Desembarcando pasajeros...");
         System.out.println("Pasajeros salvados: ");
@@ -64,7 +64,7 @@ public class Rescate extends Thread{
         System.out.println("------------------------------------");
     }
 
-    public void volviendoABarco(){
+    public synchronized void volviendoABarco(){
         System.out.println("La balsa "+balsa.getNombre()+" vuelve al barco a comprobar si quedan pasajeros.");
         try {
             Thread.sleep((int)(balsa.getTiempo()));
