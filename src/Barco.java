@@ -33,4 +33,8 @@ public class Barco {
         return prioritario; // devolvemos el pasajero más prioritario y con menor id
     }
 
+    public void bajarPasajerosBarco(Pasajero pas){
+        pasajeros.remove(pas);
+    }
+
 }
