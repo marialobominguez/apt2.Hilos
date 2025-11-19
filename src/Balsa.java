@@ -21,6 +21,7 @@ public class Balsa {
     }
 
     public void bajarPasajeroBalsa(Pasajero pas){
+        System.out.println("Pasajero salvado: "+pas.toString());
         pasajeros.remove(pas);
     }
 
