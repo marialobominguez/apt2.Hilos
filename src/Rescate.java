@@ -36,7 +36,7 @@ public class Rescate extends Thread{
         System.out.println("Embarcando pasajero(s) en la balsa "+balsa.getNombre()+"...");
         for (int i = 0; i < balsa.getCapacidad(); i++) { //vamos a meter tantos pasajeros como permita la balsa
             Pasajero p = barco.pasajeroPrioritario();
-            System.out.println("/t"+p.toString()+" sube a la balsa "+balsa.getNombre());
+            System.out.println("\t"+p.toString()+" sube a la balsa "+balsa.getNombre());
             balsa.subirPasajeroBalsa(p); //sube pasajero a la balsa y por lo tanto...
             barco.bajarPasajerosBarco(p);//... baja del barco
             System.out.println("------------------------------------");
@@ -58,7 +58,7 @@ public class Rescate extends Thread{
         System.out.println("Desembarcando pasajeros...");
         System.out.println("Pasajeros salvados: ");
         for (int i = 0; i < balsa.getPasajeros().size(); i++) {
-            System.out.println("/t"+balsa.getPasajeros().get(i).toString()+" baja de la balsa "+balsa.getNombre()); //no tengo muy claro de que esto esté bien
+            System.out.println("\t"+balsa.getPasajeros().get(i).toString()+" baja de la balsa "+balsa.getNombre()); //no tengo muy claro de que esto esté bien
             balsa.bajarPasajeroBalsa(balsa.getPasajeros().get(i)); //tampoco lo tengo claro
         }
         System.out.println("------------------------------------");
