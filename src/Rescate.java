@@ -57,7 +57,7 @@ public class Rescate extends Thread{
         System.out.println(balsa.getNombre()+" ESTÁ EN TIERRA FIRME");
         System.out.println("Desembarcando pasajeros...");
         System.out.println("Pasajeros salvados: ");
-        for (int i = 0; i < balsa.getCapacidad(); i++) {
+        for (int i = 0; i < balsa.getPasajeros().size(); i++) {
             System.out.println("/t"+balsa.getPasajeros().get(i).toString()+" baja de la balsa "+balsa.getNombre()); //no tengo muy claro de que esto esté bien
             balsa.bajarPasajeroBalsa(balsa.getPasajeros().get(i)); //tampoco lo tengo claro
         }
