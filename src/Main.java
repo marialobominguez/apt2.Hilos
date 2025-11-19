@@ -36,6 +36,14 @@ public class Main {
         //creo el Barco con los pasajeros
         Barco laAlianza = new Barco(pasajerosBarco);
 
+        //creo los rescates (hilos)
+        Rescate rescateAcasta = new Rescate(laAlianza, Acasta);
+        Rescate rescateBanff = new Rescate(laAlianza, Banff);
+        Rescate rescateCadiz = new Rescate(laAlianza, Cadiz);
+        Rescate rescateDeimos = new Rescate(laAlianza, Deimos);
+        Rescate rescateExpedicion = new Rescate(laAlianza, Expedicion);
+
+
 
     }
 }
