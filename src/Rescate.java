@@ -41,7 +41,7 @@ public class Rescate implements Runnable{
     }
 
     public synchronized void navegandoATierra(){
-        System.out.println("Navegando a tierra firme...");
+        System.out.println(balsa+" está navegando a tierra firme...");
         try {
             Thread.sleep((int)(balsa.getTiempo()));
         } catch (InterruptedException e) {
@@ -51,13 +51,14 @@ public class Rescate implements Runnable{
     }
 
     public synchronized void desembarcar(){
-        System.out.println("EN TIERRA FIRME");
+        System.out.println(balsa+" ESTÁ EN TIERRA FIRME");
         System.out.println("Desembarcando pasajeros...");
         System.out.println("Pasajeros salvados: ");
         for (int i = 0; i < balsa.getCapacidad(); i++) {
             System.out.println("/t"+balsa.getPasajeros().get(i)+" baja de la balsa "+balsa); //no tengo muy claro de que esto esté bien
             balsa.bajarPasajeroBalsa(balsa.getPasajeros().get(i)); //tampoco lo tengo claro
         }
+        System.out.println("------------------------------------");
     }
 
     public synchronized void volviendoABarco(){
@@ -67,6 +68,7 @@ public class Rescate implements Runnable{
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        System.out.println("------------------------------------");
     }
 
 }
