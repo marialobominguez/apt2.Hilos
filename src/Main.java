@@ -3,7 +3,7 @@ import java.util.ArrayList;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException, RuntimeException{
 
         //Creo las balsas:
         Balsa Acasta = new Balsa(1,0.5);

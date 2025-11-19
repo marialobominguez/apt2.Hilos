@@ -26,7 +26,13 @@ public class Rescate implements Runnable{
 
 
             //ir a tierra (sleep)
-
+            System.out.println("Navegando a tierra firme...");
+            try {
+                Thread.sleep((int)(balsa.getTiempo()));
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("------------------------------------");
 
             //desembarcar y mostrar los pasajeros rescatados (toString)
 
