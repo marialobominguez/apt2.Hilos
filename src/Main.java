@@ -43,7 +43,12 @@ public class Main {
         Rescate rescateDeimos = new Rescate(laAlianza, Deimos);
         Rescate rescateExpedicion = new Rescate(laAlianza, Expedicion);
 
-
+        //inicio los rescates
+        rescateAcasta.start();
+        rescateBanff.start();
+        rescateCadiz.start();
+        rescateDeimos.start();
+        rescateExpedicion.start();
 
     }
 }
