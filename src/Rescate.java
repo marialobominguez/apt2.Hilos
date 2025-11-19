@@ -35,6 +35,13 @@ public class Rescate implements Runnable{
             System.out.println("------------------------------------");
 
             //desembarcar y mostrar los pasajeros rescatados (toString)
+            System.out.println("EN TIERRA FIRME");
+            System.out.println("Desembarcando pasajeros...");
+            System.out.println("Pasajeros salvados: ");
+            for (int i = 0; i < balsa.getCapacidad(); i++) {
+                System.out.println("/t"+balsa.getPasajeros().get(i)+" baja de la balsa "+balsa); //no tengo muy claro de que esto esté bien
+                balsa.bajarPasajeroBalsa(balsa.getPasajeros().get(i)); //tampoco lo tengo claro
+            }
 
 
             // volvemos al barco (sleep)

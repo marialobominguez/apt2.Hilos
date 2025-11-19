@@ -29,4 +29,8 @@ public class Balsa {
         pasajeros.remove(pas);
     }
 
+    public ArrayList<Pasajero> getPasajeros() {
+        return pasajeros;
+    }
+
 }
