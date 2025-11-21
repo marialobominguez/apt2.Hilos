@@ -46,7 +46,7 @@ public class Rescate extends Thread{
         try {
             Thread.sleep((int)(balsa.getTiempo()));
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            System.err.println("Interrupción");
         }
         System.out.println("------------------------------------");
     }
@@ -64,11 +64,13 @@ public class Rescate extends Thread{
 
     public synchronized void volviendoABarco(){
         System.out.println("La balsa "+balsa.getNombre()+" vuelve al barco a comprobar si quedan pasajeros.");
+
         try {
             Thread.sleep((int)(balsa.getTiempo()));
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            System.err.println("Interrupción");
         }
+
         //muestro los pasajeros restantes
         System.out.println(balsa.getNombre()+" ve que quedan "+barco.getPasajeros().size());
         System.out.println("------------------------------------");
