@@ -13,6 +13,7 @@ public class Barco {
         return !pasajeros.isEmpty();
     }
 
+    /*
     public Pasajero pasajeroPrioritario(){
         //queremos obtener el pasajero con mayor prioridad
         if (pasajeros.isEmpty()) { //comprobamos si hay pasajeros en el barco
@@ -31,7 +32,7 @@ public class Barco {
         }
 
         return prioritario; // devolvemos el pasajero más prioritario y con menor id
-    }
+    }*/
 
     public void bajarPasajerosBarco(Pasajero pas){
         pasajeros.remove(pas);

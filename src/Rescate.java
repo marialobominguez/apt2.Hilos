@@ -33,7 +33,7 @@ public class Rescate extends Thread{
     public synchronized void embarcar(){
         System.out.println("Embarcando pasajero(s) en la balsa "+balsa.getNombre()+"...");
         for (int i = 0; i < balsa.getCapacidad(); i++) { //vamos a meter tantos pasajeros como permita la balsa
-            Pasajero p = barco.pasajeroPrioritario();
+            Pasajero p = pasajeroPrioritario2(barco);
             System.out.println("\t"+p.toString()+" sube a la balsa "+balsa.getNombre());
             balsa.subirPasajeroBalsa(p); //sube pasajero a la balsa y por lo tanto...
             barco.bajarPasajerosBarco(p);//... baja del barco
@@ -72,6 +72,26 @@ public class Rescate extends Thread{
         //muestro los pasajeros restantes
         System.out.println(balsa.getNombre()+" ve que quedan "+barco.getPasajeros().size());
         System.out.println("------------------------------------");
+    }
+
+    public synchronized Pasajero pasajeroPrioritario2(Barco barco){
+        //queremos obtener el pasajero con mayor prioridad
+        if (barco.getPasajeros().isEmpty()) { //comprobamos si hay pasajeros en el barco
+            return null; // si no hay, devolvemos nulo
+        }
+
+        Pasajero prioritario = barco.getPasajeros().get(0); //nos guardamos el primer pasajero del Array
+
+        for (Pasajero p : barco.getPasajeros()) { // recorremos los pasajeros
+            if (p.getPrioridad() < prioritario.getPrioridad()) { //si la prioridad del siguiente es menor...
+                prioritario = p; // nuestro pasajero prioritario pasa a ser ese
+            }
+            if(prioritario.getPrioridad()==1){ //si ya tenemos a uno con prioridad 1...
+                break; //dejamos de comparar
+            }
+        }
+
+        return prioritario; // devolvemos el pasajero más prioritario y con menor id
     }
 
 }
