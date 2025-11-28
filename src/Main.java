@@ -41,11 +41,11 @@ public class Main {
         Semaphore sem = new Semaphore(1); //le digo que solo un hilo lo puede usar a la vez
 
         //creo los rescates (hilos)
-        Rescate rescateAcasta = new Rescate(laAlianza, Acasta);
-        Rescate rescateBanff = new Rescate(laAlianza, Banff);
-        Rescate rescateCadiz = new Rescate(laAlianza, Cadiz);
-        Rescate rescateDeimos = new Rescate(laAlianza, Deimos);
-        Rescate rescateExpedicion = new Rescate(laAlianza, Expedicion);
+        Rescate rescateAcasta = new Rescate(laAlianza, Acasta, sem);
+        Rescate rescateBanff = new Rescate(laAlianza, Banff, sem);
+        Rescate rescateCadiz = new Rescate(laAlianza, Cadiz, sem);
+        Rescate rescateDeimos = new Rescate(laAlianza, Deimos, sem);
+        Rescate rescateExpedicion = new Rescate(laAlianza, Expedicion, sem);
 
         //inicio los rescates
         rescateAcasta.start();
