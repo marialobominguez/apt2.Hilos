@@ -28,15 +28,18 @@ public class Rescate extends Thread {
         while (barco.hayPasajeros()) {// mientras haya pasajeros vamos a:
             // 1_ embarcar = baja pasajero del barco y sube a la balsa
             embarcar();
+            //coge el semáforo, obtiene el pasajero prioritario por cada pasajero que pueda salvar,
+            // los embarca y suelta el semáforo
 
             // 2_ ir a tierra (sleep)
-            navegandoATierra();
+            navegandoATierra(); //no hay recurso compartido
 
             //3_ desembarcar y mostrar los pasajeros rescatados (toString)
-            desembarcar();
+            desembarcar(); //no hay recurso compartido
 
             // 4_ volvemos al barco (sleep)
             volviendoABarco();
+            //tampoco hay semáforo porque solo muestro, no hago nada ahí
 
 
         } //fin while (no quedan pasajeros)
@@ -44,11 +47,11 @@ public class Rescate extends Thread {
 
     public synchronized void embarcar() {
         System.out.println("Embarcando pasajero(s) en la balsa " + balsa.getNombre() + "...");
-        for (int i = 0; i < balsa.getCapacidad(); i++) { //vamos a meter tantos pasajeros como permita la balsa
-            // trycatch para coger el semáforo
-            try {
-                this.getSem().acquire();
-                //el semáforo está verde para este hilo, pero pasa a rojo para el resto
+        // trycatch para coger el semáforo
+        try {
+            this.getSem().acquire(); //el semáforo está verde para este hilo, pero pasa a rojo para el resto
+            System.out.println(balsa.getNombre() + " ha conseguido el semáforo");
+            for (int i = 0; i < balsa.getCapacidad(); i++) { //vamos a meter tantos pasajeros como permita la balsa
 
                 Pasajero p = pasajeroPrioritario2(barco);
                 System.out.println("\t" + p.toString() + " sube a la balsa " + balsa.getNombre());
@@ -56,11 +59,12 @@ public class Rescate extends Thread {
                 barco.bajarPasajerosBarco(p);//... baja del barco
                 System.out.println("------------------------------------");
 
-            } catch (InterruptedException e) {
-                System.err.println(e.getMessage());
             }
-            this.getSem().release(); // luz verde para el resto y roja para este
+
+        } catch (InterruptedException e) {
+            System.err.println(e.getMessage());
         }
+        this.getSem().release(); // luz verde para el resto y roja para este
     }
 
     public synchronized void navegandoATierra() {
@@ -94,13 +98,7 @@ public class Rescate extends Thread {
         }
 
         //muestro los pasajeros restantes
-        try {
-            this.getSem().acquire(); //para que solo uno pueda ver cuántos pasajeros quedan en elbarco
-            System.out.println(balsa.getNombre() + " ve que quedan " + barco.getPasajeros().size());
-        } catch (InterruptedException e) {
-            System.err.println(e.getMessage());
-        }
-        this.getSem().release();
+        System.out.println(balsa.getNombre() + " ve que quedan " + barco.getPasajeros().size());
         System.out.println("------------------------------------");
     }
 
@@ -109,11 +107,6 @@ public class Rescate extends Thread {
         Pasajero prioritario = null;
 
         if (!barco.getPasajeros().isEmpty()) { //comprobamos si hay pasajeros en el barco
-
-
-            try {
-                this.getSem().acquire();
-                prioritario = barco.getPasajeros().get(0); //nos guardamos el primer pasajero del Array
 
                 for (Pasajero p : barco.getPasajeros()) { // recorremos los pasajeros
                     if (p.getPrioridad() < prioritario.getPrioridad()) { //si la prioridad del siguiente es menor...
@@ -124,10 +117,6 @@ public class Rescate extends Thread {
                     }
                 }
 
-
-            } catch (InterruptedException e) {
-                System.err.println(e.getMessage());
-            }
 
         }
         return prioritario;// devolvemos el pasajero más prioritario y con menor id
