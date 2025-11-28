@@ -97,11 +97,11 @@ public class Rescate extends Thread{
         try {
             this.getSem().acquire(); //para que solo uno pueda ver cuántos pasajeros quedan en elbarco
             System.out.println(balsa.getNombre() + " ve que quedan " + barco.getPasajeros().size());
-            System.out.println("------------------------------------");
         }catch(InterruptedException e){
             System.err.println(e.getMessage());
         }
         this.getSem().release();
+        System.out.println("------------------------------------");
     }
 
     public synchronized Pasajero pasajeroPrioritario2(Barco barco){
