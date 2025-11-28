@@ -45,12 +45,21 @@ public class Rescate extends Thread{
     public synchronized void embarcar(){
         System.out.println("Embarcando pasajero(s) en la balsa "+balsa.getNombre()+"...");
         for (int i = 0; i < balsa.getCapacidad(); i++) { //vamos a meter tantos pasajeros como permita la balsa
+            // trycatch para coger el semáforo
+            try{
+                this.getSem().acquire();
+                //el semáforo está verde para este hilo, pero pasa a rojo para el resto
 
                 Pasajero p = pasajeroPrioritario2(barco);
                 System.out.println("\t"+p.toString()+" sube a la balsa "+balsa.getNombre());
                 balsa.subirPasajeroBalsa(p); //sube pasajero a la balsa y por lo tanto...
                 barco.bajarPasajerosBarco(p);//... baja del barco
                 System.out.println("------------------------------------");
+
+            }catch(InterruptedException e){
+                System.err.println(e.getMessage());
+            }
+            this.getSem().release(); // luz verde para el resto y roja para este
         }
     }
 
