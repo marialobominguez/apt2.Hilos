@@ -45,7 +45,7 @@ public class Rescate extends Thread {
         } //fin while (no quedan pasajeros)
     } // fin run
 
-    public synchronized void embarcar() {
+    public void embarcar() {
         System.out.println("Embarcando pasajero(s) en la balsa " + balsa.getNombre() + "...");
         // trycatch para coger el semáforo
         try {
@@ -67,7 +67,7 @@ public class Rescate extends Thread {
         this.getSem().release(); // luz verde para el resto y roja para este
     }
 
-    public synchronized void navegandoATierra() {
+    public void navegandoATierra() {
         System.out.println(balsa.getNombre() + " está navegando a tierra firme...");
         try {
             Thread.sleep((int) (balsa.getTiempo()));
@@ -77,7 +77,7 @@ public class Rescate extends Thread {
         System.out.println("------------------------------------");
     }
 
-    public synchronized void desembarcar() {
+    public void desembarcar() {
         System.out.println(balsa.getNombre() + " ESTÁ EN TIERRA FIRME");
         System.out.println("Desembarcando pasajeros...");
         System.out.println("Pasajeros salvados: ");
@@ -88,7 +88,7 @@ public class Rescate extends Thread {
         System.out.println("------------------------------------");
     }
 
-    public synchronized void volviendoABarco() {
+    public void volviendoABarco() {
         System.out.println("La balsa " + balsa.getNombre() + " vuelve al barco a comprobar si quedan pasajeros.");
 
         try {
@@ -102,11 +102,12 @@ public class Rescate extends Thread {
         System.out.println("------------------------------------");
     }
 
-    public synchronized Pasajero pasajeroPrioritario2(Barco barco) {
+    public Pasajero pasajeroPrioritario2(Barco barco) {
         //queremos obtener el pasajero con mayor prioridad
         Pasajero prioritario = null;
 
         if (!barco.getPasajeros().isEmpty()) { //comprobamos si hay pasajeros en el barco
+            prioritario = barco.getPasajeros().get(0);
 
                 for (Pasajero p : barco.getPasajeros()) { // recorremos los pasajeros
                     if (p.getPrioridad() < prioritario.getPrioridad()) { //si la prioridad del siguiente es menor...
