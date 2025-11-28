@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.concurrent.Semaphore;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -35,6 +36,9 @@ public class Main {
 
         //creo el Barco con los pasajeros
         Barco laAlianza = new Barco(pasajerosBarco);
+
+        //creo el semáforo
+        Semaphore sem = new Semaphore(1); //le digo que solo un hilo lo puede usar a la vez
 
         //creo los rescates (hilos)
         Rescate rescateAcasta = new Rescate(laAlianza, Acasta);
