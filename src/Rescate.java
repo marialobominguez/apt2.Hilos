@@ -109,19 +109,23 @@ public class Rescate extends Thread{
         if (barco.getPasajeros().isEmpty()) { //comprobamos si hay pasajeros en el barco
             return null; // si no hay, devolvemos nulo
         }
+        try {
+            this.getSem().acquire();
+            Pasajero prioritario = barco.getPasajeros().get(0); //nos guardamos el primer pasajero del Array
 
-        Pasajero prioritario = barco.getPasajeros().get(0); //nos guardamos el primer pasajero del Array
+            for (Pasajero p : barco.getPasajeros()) { // recorremos los pasajeros
+                if (p.getPrioridad() < prioritario.getPrioridad()) { //si la prioridad del siguiente es menor...
+                    prioritario = p; // nuestro pasajero prioritario pasa a ser ese
+                }
+                if (prioritario.getPrioridad() == 1) { //si ya tenemos a uno con prioridad 1...
+                    break; //dejamos de comparar
+                }
+            }
 
-        for (Pasajero p : barco.getPasajeros()) { // recorremos los pasajeros
-            if (p.getPrioridad() < prioritario.getPrioridad()) { //si la prioridad del siguiente es menor...
-                prioritario = p; // nuestro pasajero prioritario pasa a ser ese
-            }
-            if(prioritario.getPrioridad()==1){ //si ya tenemos a uno con prioridad 1...
-                break; //dejamos de comparar
-            }
+            return prioritario;// devolvemos el pasajero más prioritario y con menor id
+        }catch(InterruptedException e){
+            System.err.println(e.getMessage());
         }
-
-        return prioritario; // devolvemos el pasajero más prioritario y con menor id
     }
 
 }
