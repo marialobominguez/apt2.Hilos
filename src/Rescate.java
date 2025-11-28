@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
-public class Rescate extends Thread{
+public class Rescate extends Thread {
 
     private Barco barco;
     private Balsa balsa;
@@ -25,7 +25,7 @@ public class Rescate extends Thread{
 
     @Override
     public void run() {
-        while (barco.hayPasajeros()){// mientras haya pasajeros vamos a:
+        while (barco.hayPasajeros()) {// mientras haya pasajeros vamos a:
             // 1_ embarcar = baja pasajero del barco y sube a la balsa
             embarcar();
 
@@ -42,53 +42,53 @@ public class Rescate extends Thread{
         } //fin while (no quedan pasajeros)
     } // fin run
 
-    public synchronized void embarcar(){
-        System.out.println("Embarcando pasajero(s) en la balsa "+balsa.getNombre()+"...");
+    public synchronized void embarcar() {
+        System.out.println("Embarcando pasajero(s) en la balsa " + balsa.getNombre() + "...");
         for (int i = 0; i < balsa.getCapacidad(); i++) { //vamos a meter tantos pasajeros como permita la balsa
             // trycatch para coger el semáforo
-            try{
+            try {
                 this.getSem().acquire();
                 //el semáforo está verde para este hilo, pero pasa a rojo para el resto
 
                 Pasajero p = pasajeroPrioritario2(barco);
-                System.out.println("\t"+p.toString()+" sube a la balsa "+balsa.getNombre());
+                System.out.println("\t" + p.toString() + " sube a la balsa " + balsa.getNombre());
                 balsa.subirPasajeroBalsa(p); //sube pasajero a la balsa y por lo tanto...
                 barco.bajarPasajerosBarco(p);//... baja del barco
                 System.out.println("------------------------------------");
 
-            }catch(InterruptedException e){
+            } catch (InterruptedException e) {
                 System.err.println(e.getMessage());
             }
             this.getSem().release(); // luz verde para el resto y roja para este
         }
     }
 
-    public synchronized void navegandoATierra(){
-        System.out.println(balsa.getNombre()+" está navegando a tierra firme...");
+    public synchronized void navegandoATierra() {
+        System.out.println(balsa.getNombre() + " está navegando a tierra firme...");
         try {
-            Thread.sleep((int)(balsa.getTiempo()));
+            Thread.sleep((int) (balsa.getTiempo()));
         } catch (InterruptedException e) {
             System.err.println("Interrupción");
         }
         System.out.println("------------------------------------");
     }
 
-    public synchronized void desembarcar(){
-        System.out.println(balsa.getNombre()+" ESTÁ EN TIERRA FIRME");
+    public synchronized void desembarcar() {
+        System.out.println(balsa.getNombre() + " ESTÁ EN TIERRA FIRME");
         System.out.println("Desembarcando pasajeros...");
         System.out.println("Pasajeros salvados: ");
         for (int i = 0; i < balsa.getPasajeros().size(); i++) {
-            System.out.println("\t"+balsa.getPasajeros().get(i).toString()+" baja de la balsa "+balsa.getNombre());
+            System.out.println("\t" + balsa.getPasajeros().get(i).toString() + " baja de la balsa " + balsa.getNombre());
             balsa.bajarPasajeroBalsa(balsa.getPasajeros().get(i));
         }
         System.out.println("------------------------------------");
     }
 
-    public synchronized void volviendoABarco(){
-        System.out.println("La balsa "+balsa.getNombre()+" vuelve al barco a comprobar si quedan pasajeros.");
+    public synchronized void volviendoABarco() {
+        System.out.println("La balsa " + balsa.getNombre() + " vuelve al barco a comprobar si quedan pasajeros.");
 
         try {
-            Thread.sleep((int)(balsa.getTiempo()));
+            Thread.sleep((int) (balsa.getTiempo()));
         } catch (InterruptedException e) {
             System.err.println("Interrupción");
         }
@@ -97,35 +97,43 @@ public class Rescate extends Thread{
         try {
             this.getSem().acquire(); //para que solo uno pueda ver cuántos pasajeros quedan en elbarco
             System.out.println(balsa.getNombre() + " ve que quedan " + barco.getPasajeros().size());
-        }catch(InterruptedException e){
+        } catch (InterruptedException e) {
             System.err.println(e.getMessage());
         }
         this.getSem().release();
         System.out.println("------------------------------------");
     }
 
-    public synchronized Pasajero pasajeroPrioritario2(Barco barco){
+    public synchronized Pasajero pasajeroPrioritario2(Barco barco) {
         //queremos obtener el pasajero con mayor prioridad
-        if (barco.getPasajeros().isEmpty()) { //comprobamos si hay pasajeros en el barco
-            return null; // si no hay, devolvemos nulo
-        }
-        try {
-            this.getSem().acquire();
-            Pasajero prioritario = barco.getPasajeros().get(0); //nos guardamos el primer pasajero del Array
+        Pasajero prioritario = null;
 
-            for (Pasajero p : barco.getPasajeros()) { // recorremos los pasajeros
-                if (p.getPrioridad() < prioritario.getPrioridad()) { //si la prioridad del siguiente es menor...
-                    prioritario = p; // nuestro pasajero prioritario pasa a ser ese
+        if (!barco.getPasajeros().isEmpty()) { //comprobamos si hay pasajeros en el barco
+
+
+            try {
+                this.getSem().acquire();
+                prioritario = barco.getPasajeros().get(0); //nos guardamos el primer pasajero del Array
+
+                for (Pasajero p : barco.getPasajeros()) { // recorremos los pasajeros
+                    if (p.getPrioridad() < prioritario.getPrioridad()) { //si la prioridad del siguiente es menor...
+                        prioritario = p; // nuestro pasajero prioritario pasa a ser ese
+                    }
+                    if (prioritario.getPrioridad() == 1) { //si ya tenemos a uno con prioridad 1...
+                        break; //dejamos de comparar
+                    }
                 }
-                if (prioritario.getPrioridad() == 1) { //si ya tenemos a uno con prioridad 1...
-                    break; //dejamos de comparar
-                }
+
+
+            } catch (InterruptedException e) {
+                System.err.println(e.getMessage());
             }
 
-            return prioritario;// devolvemos el pasajero más prioritario y con menor id
-        }catch(InterruptedException e){
-            System.err.println(e.getMessage());
         }
+        return prioritario;// devolvemos el pasajero más prioritario y con menor id
+        //si el barco está vacío, me devuelve null porque así lo he declarado al principio
+        //si no está vacío, el pasajero toma el valor del pasajero más prioritario
     }
+
 
 }
