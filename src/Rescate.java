@@ -1,14 +1,26 @@
 import java.util.ArrayList;
+import java.util.concurrent.Semaphore;
 
 public class Rescate extends Thread{
 
     private Barco barco;
     private Balsa balsa;
+    private Semaphore sem; //clase semáforo
 
     // le paso el barco y la balsa para poder hacer cosas con ambos
-    public Rescate(Barco barco, Balsa balsa) {
+    public Rescate(Barco barco, Balsa balsa, Semaphore sem) {
         this.barco = barco;
         this.balsa = balsa;
+        this.sem = sem;
+    }
+
+    public Semaphore getSem() {
+        return sem;
+    }
+
+
+    public void setSem(Semaphore sem) {
+        this.sem = sem;
     }
 
     @Override
@@ -33,11 +45,12 @@ public class Rescate extends Thread{
     public synchronized void embarcar(){
         System.out.println("Embarcando pasajero(s) en la balsa "+balsa.getNombre()+"...");
         for (int i = 0; i < balsa.getCapacidad(); i++) { //vamos a meter tantos pasajeros como permita la balsa
-            Pasajero p = pasajeroPrioritario2(barco);
-            System.out.println("\t"+p.toString()+" sube a la balsa "+balsa.getNombre());
-            balsa.subirPasajeroBalsa(p); //sube pasajero a la balsa y por lo tanto...
-            barco.bajarPasajerosBarco(p);//... baja del barco
-            System.out.println("------------------------------------");
+
+                Pasajero p = pasajeroPrioritario2(barco);
+                System.out.println("\t"+p.toString()+" sube a la balsa "+balsa.getNombre());
+                balsa.subirPasajeroBalsa(p); //sube pasajero a la balsa y por lo tanto...
+                barco.bajarPasajerosBarco(p);//... baja del barco
+                System.out.println("------------------------------------");
         }
     }
 
